@@ -15,13 +15,25 @@ module.exports = {
   setCurrency: curr => {
     currency = curr
   },
-  getPrices: async () => new Promise((resolve, reject) => {
+  getPrices: async function() {
     const currencyPair = currency
 
-    client.getPrice({ currencyPair }, (err, obj) => {
-      err ? reject(err) : resolve(obj.data)
-    })
-  }),
+    const actions = [this.getSpotPrice(), this.getBuyPrice(),
+      this.getSellPrice()]
+
+    const results = await Promise.all(actions)
+    const ordering = ['spot', 'buy', 'sell']
+
+    const dict = {}
+
+    for (let i in ordering) {
+      const order = ordering[i]
+      const result = results[i]
+      dict[order] = result
+    }
+
+    return dict
+  },
   getSpotPrice: async () => new Promise((resolve, reject) => {
     const currencyPair = currency
 
@@ -36,7 +48,7 @@ module.exports = {
       err ? reject(err) : resolve(obj.data)
     })
   }),
-  getSellPrice: async () => new Promise((resolve, reject) => {
+  getSellPrice: async () => new Promise((resolve, reject) => {  
     const currencyPair = currency
     client.getSellPrice({ currencyPair }, (err, obj) => {
       err ? reject(err) : resolve(obj.data)
