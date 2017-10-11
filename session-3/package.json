@@ -1,0 +1,28 @@
+{
+  "name": "crypto-trader",
+  "version": "1.0.0",
+  "description": "A Crpto Currency Trading Bot",
+  "main": "index.js",
+  "scripts": {
+    "prod": "NODE_ENV=production NODE_PATH=src node src/index.js",
+    "start": "NODE_PATH=src node src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/elliottminns/CryptoTrader.git"
+  },
+  "author": "Elliott Minns",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/elliottminns/CryptoTrader/issues"
+  },
+  "homepage": "https://github.com/elliottminns/CryptoTrader#readme",
+  "dependencies": {
+    "coinbase": "^2.0.6",
+    "forever": "^0.15.3",
+    "moment": "^2.18.1",
+    "mongoose": "^4.11.13",
+    "technicalindicators": "^1.0.20"
+  }
+}
